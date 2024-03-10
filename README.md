@@ -9,3 +9,6 @@ Just run:
 python manage.py runserver
 ```
 and have fun! :) 
+
+
+Keep in mind it is stil WIP and it will have bugs.
