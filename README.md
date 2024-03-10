@@ -1,0 +1,2 @@
+# Botanic
+Django school project
