@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>Botanic</title>
+  {% load static %}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../static/botanic/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">Botanic</label>
+    <ul>
+      <li><a href="#">За нас</a></li>
+      <li><a href="#">Цветя</a></li>
+      <li><a href="#">Контакти</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'logout_user' %}">Изход</a></li>
+      {% else %}
+        <li><a href="{% url 'login_user' %}">Влез</a></li>
+        <li><a href="{% url 'register_user' %}">Регистрация</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+  <br>
+{% if plant_list %}
+
+<div class="row">
+  {% for plant in plant_list %}
+  <div class="column">
+    <h2>{{ plant.name }}</h2>
+    <img src="{{ plant.img.url }}" width="200">
+    <p>{{ plant.description }}</p>
+    <hr>
+    <div class="cave-button">
+      <a href="{% url 'show_plant' plant.id %}">
+        <button>Прочети още</button>
+      </a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+{% else %}
+    <p>No plants are available.</p>
+{% endif %}
+
+</body>
+</html>
