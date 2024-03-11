@@ -4,8 +4,16 @@ from django.template import loader
 from .models import Plant
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+class UserPlantPortfolio(ListView, LoginRequiredMixin):
+  model = Plant
+  context_object_name = 'plants'
+  template_name = 'user_portfolio.html'
 
+  def get_queryset(self):
+    return Plant.objects.filter(owner=self.request.user)
 # Create your views here.
 def index(request):
   plant_list = Plant.objects.all()
