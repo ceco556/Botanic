@@ -13,7 +13,7 @@ class UserPlantPortfolio(ListView, LoginRequiredMixin):
   template_name = 'user_portfolio.html'
 
   def get_queryset(self):
-    return Plant.objects.filter(owner=self.request.user)
+    return self.request.user.plants.all()
 # Create your views here.
 def index(request):
   plant_list = Plant.objects.all()
